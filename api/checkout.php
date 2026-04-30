@@ -1,0 +1,32 @@
+<?php
+require 'config.php';
+
+$data = json_decode(file_get_contents("php://input"), true);
+
+if (empty($data['user_id']) || empty($data['items']) || empty($data['total'])) {
+    echo json_encode(["error" => "Missing order data"]);
+    exit();
+}
+
+try {
+    $paynow_ref = "PAY-" . strtoupper(uniqid());
+
+    $stmt = $pdo->prepare("INSERT INTO orders (user_id, total, status, paynow_ref) VALUES (?, ?, 'pending', ?)");
+    $stmt->execute([$data['user_id'], $data['total'], $paynow_ref]);
+    $order_id = $pdo->lastInsertId();
+
+    foreach ($data['items'] as $item) {
+        $stmt2 = $pdo->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
+        $stmt2->execute([$order_id, $item['id'], $item['quantity'], $item['price']]);
+    }
+
+    echo json_encode([
+        "success" => true,
+        "order_id" => $order_id,
+        "paynow_ref" => $paynow_ref,
+        "message" => "Order placed! Redirecting to PayNow..."
+    ]);
+} catch (PDOException $e) {
+    echo json_encode(["error" => "Order failed: " . $e->getMessage()]);
+}
+?>
