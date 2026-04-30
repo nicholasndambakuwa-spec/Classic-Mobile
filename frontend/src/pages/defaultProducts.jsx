@@ -1,0 +1,51 @@
+export const defaultProducts = [
+  {
+    id: 1,
+    name: 'Classic Pro Smartphone',
+    description: 'Flagship handset with premium camera, 5G speed, and long-lasting battery.',
+    price: '799.99',
+    image_url: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 2,
+    name: 'Urban Smartwatch',
+    description: 'Fitness tracking, notifications, and sleek design for modern life.',
+    price: '199.99',
+    image_url: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 3,
+    name: 'Noise-Canceling Earbuds',
+    description: 'Immersive sound with active noise cancellation and wireless charging.',
+    price: '129.99',
+    image_url: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 4,
+    name: 'Foldable Tablet',
+    description: 'Versatile tablet experience with a large screen and compact foldable design.',
+    price: '649.99',
+    image_url: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 5,
+    name: 'Portable Power Bank',
+    description: 'Fast charging power bank for your phone, earbuds, and wearable devices.',
+    price: '49.99',
+    image_url: 'https://images.unsplash.com/photo-1622445275576-9313253038cf?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 6,
+    name: 'Wireless Charging Stand',
+    description: 'Qi-certified charging stand for fast, cable-free power on your desk or nightstand.',
+    price: '59.99',
+    image_url: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 7,
+    name: 'Bluetooth Speaker',
+    description: 'Portable speaker with deep bass, water resistance, and long battery life.',
+    price: '89.99',
+    image_url: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80',
+  },
+];

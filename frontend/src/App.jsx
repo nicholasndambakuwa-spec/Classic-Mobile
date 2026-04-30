@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Success from './pages/Success';
+import DemoPay from './pages/DemoPay';
 
 function Navbar({ cart, user, setUser }) {
   const navigate = useNavigate();
@@ -21,13 +23,13 @@ function Navbar({ cart, user, setUser }) {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="logo">🛍️ ShopZim</Link>
+      <Link to="/" className="logo">� Classic Mobile</Link>
       <div className="nav-links">
         <Link to="/">Home</Link>
         {user ? (
           <>
             <span style={{color: '#aaa', fontSize: '0.9rem'}}>Hi, {user.name}!</span>
-            <a href="#" onClick={handleLogout}>Logout</a>
+            <button type="button" className="logout-btn" onClick={handleLogout}>Logout</button>
           </>
         ) : (
           <>
@@ -86,8 +88,10 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} user={user} />} />
         <Route path="/checkout" element={<Checkout cart={cart} user={user} clearCart={clearCart} />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/demo-pay" element={<DemoPay />} />
       </Routes>
-      <footer><p>© 2025 ShopZim — Built with ❤️</p></footer>
+      <footer><p>© 2026 Classic Mobile — Built with ❤️</p></footer>
     </Router>
   );
 }

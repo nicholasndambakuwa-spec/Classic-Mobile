@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -14,7 +14,11 @@ export default function Checkout({ cart, user, clearCart }) {
     if (cart.length === 0) { toast.error('Cart is empty!'); return; }
 
     setLoading(true);
+    let paynowWindow = null;
+
     try {
+      paynowWindow = window.open('', '_blank');
+
       const orderData = {
         user_id: user.id,
         total: total.toFixed(2),
@@ -30,20 +34,38 @@ export default function Checkout({ cart, user, clearCart }) {
       if (res.data.success) {
         setOrderDone(res.data);
         clearCart();
-        toast.success('Order placed! Proceeding to PayNow...');
+        toast.success('Order placed!');
 
-        // PayNow sandbox integration
-        // When you have your PayNow account, replace the URL below
-        // with your actual PayNow sandbox initiation URL
-        const paynowUrl = `https://www.paynow.co.zw/Interface/CheckOut?guid=${paynowId}&resourcenumber=${res.data.orderId}&amount=${total}&resulturl=http://localhost/myshop/api/update_order.php&returnurl=http://localhost:5173/success&status=Message`;
+        // Check if PayNow is properly configured
+        const paynowGuid = res.data.paynow_guid || res.data.paynowGuid || res.data.guid;
+        const paynowRef = res.data.paynow_ref || res.data.paynowRef;
+        const isDemoMode = res.data.demo_mode;
 
-        setTimeout(() => {
-          window.open(paynowUrl, '_blank');
-        }, 1500);
+        if (paynowGuid && !isDemoMode) {
+          // Full PayNow integration with valid GUID
+          const paynowUrl = `https://www.paynow.co.zw/Interface/CheckOut?guid=${encodeURIComponent(paynowGuid)}&resourcenumber=${encodeURIComponent(res.data.orderId || res.data.order_id)}&amount=${encodeURIComponent(total.toFixed(2))}&resulturl=http://localhost/myshop/api/update_order.php&returnurl=http://localhost:5173/success&status=Message`;
+          if (paynowWindow) {
+            paynowWindow.location.href = paynowUrl;
+          } else {
+            window.location.assign(paynowUrl);
+          }
+        } else if (isDemoMode || paynowRef) {
+          // Demo mode - show simulated payment interface
+          if (paynowWindow) paynowWindow.close();
+          
+          // Open demo payment modal/redirect
+          const demoUrl = `/demo-pay?ref=${encodeURIComponent(paynowRef)}&amount=${encodeURIComponent(total.toFixed(2))}&order=${encodeURIComponent(res.data.order_id)}`;
+          navigate(demoUrl);
+        } else {
+          if (paynowWindow) paynowWindow.close();
+          toast.info('Order placed. PayNow integration is not configured.');
+        }
       } else {
-        toast.error(res.data.error);
+        if (paynowWindow) paynowWindow.close();
+        toast.error(res.data.error || 'Checkout failed. Please try again.');
       }
     } catch {
+      if (paynowWindow) paynowWindow.close();
       toast.error('Checkout failed. Is XAMPP running?');
     }
     setLoading(false);
@@ -56,9 +78,11 @@ export default function Checkout({ cart, user, clearCart }) {
         <h2 style={{fontFamily: 'Playfair Display, serif', fontSize: '2rem', marginBottom: '1rem'}}>
           Order Confirmed!
         </h2>
-        <p style={{color: '#777', marginBottom: '0.5rem'}}>Order ID: #{orderDone.order_id}</p>
-        <p style={{color: '#777', marginBottom: '0.5rem'}}>PayNow Reference: {orderDone.paynow_ref}</p>
-        <p style={{color: '#777', marginBottom: '2rem'}}>A PayNow payment window has opened. Complete your payment there.</p>
+        <p style={{color: '#777', marginBottom: '0.5rem'}}>Order ID: #{orderDone.order_id || orderDone.orderId}</p>
+        {(orderDone.paynow_ref || orderDone.paynowRef) && (
+          <p style={{color: '#777', marginBottom: '0.5rem'}}>PayNow Reference: {orderDone.paynow_ref || orderDone.paynowRef}</p>
+        )}
+        <p style={{color: '#777', marginBottom: '2rem'}}>A PayNow payment window has opened if your payment setup is configured.</p>
         <button className="submit-btn" style={{maxWidth: '300px', margin: '0 auto'}} onClick={() => navigate('/')}>
           Continue Shopping
         </button>

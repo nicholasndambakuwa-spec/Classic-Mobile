@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { getProductImageUrl } from '../utils/fallbackImages';
 
 export default function Cart({ cart, removeFromCart, user }) {
   const navigate = useNavigate();
@@ -30,17 +30,20 @@ export default function Cart({ cart, removeFromCart, user }) {
   return (
     <div className="cart-page">
       <h2>Your Cart</h2>
-      {cart.map(item => (
-        <div className="cart-item" key={item.id}>
-          <img src={item.image_url} alt={item.name} />
-          <div className="cart-item-info">
-            <h4>{item.name}</h4>
-            <p className="item-price">${parseFloat(item.price).toFixed(2)} × {item.quantity}</p>
-            <p style={{color: '#999', fontSize: '0.85rem'}}>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
+      {cart.map((item, index) => {
+        const imageUrl = getProductImageUrl(item, index);
+        return (
+          <div className="cart-item" key={item.id}>
+            <img src={imageUrl} alt={item.name} />
+            <div className="cart-item-info">
+              <h4>{item.name}</h4>
+              <p className="item-price">${parseFloat(item.price).toFixed(2)} × {item.quantity}</p>
+              <p style={{color: '#999', fontSize: '0.85rem'}}>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
+            </div>
+            <button className="remove-btn" onClick={() => removeFromCart(item.id)}>✕</button>
           </div>
-          <button className="remove-btn" onClick={() => removeFromCart(item.id)}>✕</button>
-        </div>
-      ))}
+        );
+      })}
       <div className="cart-total">
         <span style={{fontSize: '1.2rem', fontWeight: 500}}>Total: ${total.toFixed(2)}</span>
         <button className="checkout-btn" onClick={goCheckout}>Checkout →</button>

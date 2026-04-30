@@ -20,12 +20,34 @@ try {
         $stmt2->execute([$order_id, $item['id'], $item['quantity'], $item['price']]);
     }
 
-    echo json_encode([
-        "success" => true,
-        "order_id" => $order_id,
-        "paynow_ref" => $paynow_ref,
-        "message" => "Order placed! Redirecting to PayNow..."
-    ]);
+    // Check if PayNow is configured with real credentials
+    // For demo mode, we don't return a guid - frontend will show a demo payment page
+    $paynow_configured = false; // Set to true and add real credentials below for live PayNow
+    
+    if ($paynow_configured) {
+        $paynow_integration_id = "YOUR_REAL_INTEGRATION_ID"; // Get from PayNow dashboard
+        $paynow_integration_key = "YOUR_REAL_INTEGRATION_KEY"; // Get from PayNow dashboard
+        $hashString = $paynow_integration_id . $data['total'] . $paynow_ref . $paynow_integration_key;
+        $hash = hash('sha512', $hashString);
+        
+        echo json_encode([
+            "success" => true,
+            "order_id" => $order_id,
+            "paynow_ref" => $paynow_ref,
+            "paynow_guid" => $paynow_integration_id,
+            "hash" => $hash,
+            "message" => "Order placed! Redirecting to PayNow..."
+        ]);
+    } else {
+        // Demo mode - no real PayNow redirect
+        echo json_encode([
+            "success" => true,
+            "order_id" => $order_id,
+            "paynow_ref" => $paynow_ref,
+            "demo_mode" => true,
+            "message" => "Order placed! Opening payment..."
+        ]);
+    }
 } catch (PDOException $e) {
     echo json_encode(["error" => "Order failed: " . $e->getMessage()]);
 }
