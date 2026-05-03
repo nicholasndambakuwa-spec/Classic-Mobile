@@ -17,7 +17,7 @@ Before starting, ensure you have:
 
 ### 1.1 Update API URLs for Production
 
-Since 000webhost provides PHP and MySQL, you'll need to update your frontend to point to the hosted API instead of localhost.
+Since 000webhost provides PHP and MySQL, you'll need to update your frontend to point to the hosted API instead of https://classicmobile.infinityfreeapp.com.
 
 **File:** `frontend/src/pages/Checkout.jsx`
 
@@ -144,7 +144,7 @@ public_html/
 
 Save these details:
 ```
-Host: localhost
+Host: https://classicmobile.infinityfreeapp.com
 Database: your_username_shopdb
 User: your_username_shopdb_user
 Password: your-password
@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // UPDATE THESE WITH YOUR 000WEBHOST DATABASE DETAILS
-$host = "localhost";
+$host = "https://classicmobile.infinityfreeapp.com";
 $db   = "your_username_shopdb";      // Your database name
 $user = "your_username_shopdb_user"; // Your database user
 $pass = "your-password";             // Your database password

@@ -322,13 +322,13 @@ Edit your `api/config.php` file to use the 000WebHost database:
 ```php
 <?php
 // Old settings (your local computer)
-$host = "localhost";
+$host = "https://classicmobile.infinityfreeapp.com";
 $user = "root";
 $pass = "";
 $db   = "myshop";
 
 // New settings (000WebHost) - UPDATE THESE!
-$host = "localhost";           // Usually localhost
+$host = "https://classicmobile.infinityfreeapp.com";           // Usually https://classicmobile.infinityfreeapp.com
 $user = "YOUR_000WEBHOST_USERNAME";
 $pass = "YOUR_DATABASE_PASSWORD";
 $db   = "YOUR_DATABASE_NAME";
@@ -358,7 +358,7 @@ In your React frontend, find where you call your API. It's probably in files lik
 
 Look for something like:
 ```javascript
-const API_URL = "http://localhost/api/";  // Old local address
+const API_URL = "http://https://classicmobile.infinityfreeapp.com/api/";  // Old local address
 ```
 
 Change it to:
@@ -370,7 +370,7 @@ const API_URL = "https://YOUR-SITE.000webhostapp.com/";  // New internet address
 
 ```javascript
 // Before (local)
-axios.get('http://localhost/api/products.php')
+axios.get('http://https://classicmobile.infinityfreeapp.com/api/products.php')
 
 // After (internet)
 axios.get('https://your-site.000webhostapp.com/products.php')

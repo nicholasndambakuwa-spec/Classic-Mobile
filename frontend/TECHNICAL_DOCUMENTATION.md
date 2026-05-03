@@ -422,7 +422,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Database configuration
-$host = "localhost";
+$host = "https://classicmobile.infinityfreeapp.com";
 $db   = "shopdb";
 $user = "root";
 $pass = "";  // XAMPP default has no password
@@ -742,7 +742,7 @@ https://www.paynow.co.zw/Interface/CheckOut?
   &resourcenumber=ORDER123
   &amount=149.99
   &resulturl=https://classicmobile.infinityfreeapp.com/update_order.php
-  &returnurl=http://localhost:5173/success
+  &returnurl=http://https://classicmobile.infinityfreeapp.com:5173/success
   &status=Message
 ```
 
@@ -1079,7 +1079,7 @@ navigate('/demo-pay?ref=PAY-123&amount=99.99');
 
 ### Step 2: Create Database
 ```
-1. Open phpMyAdmin (http://localhost/phpmyadmin)
+1. Open phpMyAdmin (http://https://classicmobile.infinityfreeapp.com/phpmyadmin)
 2. Create database named "shopdb"
 3. Create tables: users, orders, order_items
 ```
@@ -1098,7 +1098,7 @@ npm run dev
 
 ### Step 5: Access the Application
 ```
-Open browser to: http://localhost:5173
+Open browser to: http://https://classicmobile.infinityfreeapp.com:5173
 ```
 
 ## 11.3 Environment Variables

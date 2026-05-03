@@ -43,7 +43,7 @@ export default function Checkout({ cart, user, clearCart }) {
 
         if (paynowGuid && !isDemoMode) {
           // Full PayNow integration with valid GUID
-          const paynowUrl = `https://www.paynow.co.zw/Interface/CheckOut?guid=${encodeURIComponent(paynowGuid)}&resourcenumber=${encodeURIComponent(res.data.orderId || res.data.order_id)}&amount=${encodeURIComponent(total.toFixed(2))}&resulturl=https://classicmobile.infinityfreeapp.com/update_order.php&returnurl=http://localhost:5173/success&status=Message`;
+          const paynowUrl = `https://www.paynow.co.zw/Interface/CheckOut?guid=${encodeURIComponent(paynowGuid)}&resourcenumber=${encodeURIComponent(res.data.orderId || res.data.order_id)}&amount=${encodeURIComponent(total.toFixed(2))}&resulturl=https://classicmobile.infinityfreeapp.com/update_order.php&returnurl=http://https://classicmobile.infinityfreeapp.com:5173/success&status=Message`;
           if (paynowWindow) {
             paynowWindow.location.href = paynowUrl;
           } else {
