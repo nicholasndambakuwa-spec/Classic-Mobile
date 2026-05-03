@@ -1,6 +1,26 @@
 <?php
 require 'config.php';
 
+/**
+ * PayNow Checkout Integration
+ * 
+ * DEMO MODE: Currently configured to use PayNow demo payment page
+ * TEST MODE: To use actual PayNow test credentials:
+ * 
+ * 1. Sign up at: https://www.paynow.co.zw/Customer/Register
+ * 2. Go to: https://www.paynow.co.zw/Home/Receive
+ * 3. Create an Advanced Integration (initially in TEST mode)
+ * 4. Get your Integration ID and Key
+ * 5. Use PayNow Test Tokens (from https://developers.paynow.co.zw/docs/paynow/test_mode):
+ *    - Mobile: 0771111111 (success), 0772222222 (delayed), 0773333333 (cancelled), 0774444444 (insufficient)
+ *    - Cards: {11111111-1111-1111-1111-111111111111} (success), etc.
+ * 
+ * LIVE MODE: When ready for production:
+ * - Request to be Set Live from PayNow dashboard
+ * - Update integration ID and key to production credentials
+ * - Set paynow_configured = true
+ */
+
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (empty($data['user_id']) || empty($data['items']) || empty($data['total'])) {
