@@ -619,7 +619,7 @@ export default function DemoPay() {
     // Simulate payment processing (2 seconds)
     setTimeout(async () => {
       try {
-        await fetch('http://localhost/myshop/api/update_order.php', {
+        await fetch('https://classicmobile.infinityfreeapp.com/update_order.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -741,7 +741,7 @@ https://www.paynow.co.zw/Interface/CheckOut?
   guid=YOUR_INTEGRATION_ID
   &resourcenumber=ORDER123
   &amount=149.99
-  &resulturl=http://localhost/myshop/api/update_order.php
+  &resulturl=https://classicmobile.infinityfreeapp.com/update_order.php
   &returnurl=http://localhost:5173/success
   &status=Message
 ```
@@ -1009,7 +1009,7 @@ The frontend uses **Axios** to communicate with the PHP backend:
 import axios from 'axios';
 
 // Making a POST request
-const res = await axios.post('http://localhost/myshop/api/checkout.php', orderData);
+const res = await axios.post('https://classicmobile.infinityfreeapp.com/checkout.php', orderData);
 
 // Accessing response
 if (res.data.success) {

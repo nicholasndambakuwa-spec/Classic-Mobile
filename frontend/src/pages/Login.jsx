@@ -14,7 +14,7 @@ export default function Login({ loginUser }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost/myshop/api/login.php', form);
+      const res = await axios.post('https://classicmobile.infinityfreeapp.com/login.php', form);
       if (res.data.success) {
         loginUser(res.data.user);
         toast.success('Welcome back! 🎉');

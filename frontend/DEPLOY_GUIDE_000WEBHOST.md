@@ -23,7 +23,7 @@ Since 000webhost provides PHP and MySQL, you'll need to update your frontend to 
 
 Change:
 ```javascript
-const res = await axios.post('http://localhost/myshop/api/checkout.php', orderData);
+const res = await axios.post('https://classicmobile.infinityfreeapp.com/checkout.php', orderData);
 ```
 
 To (use relative URL for production):

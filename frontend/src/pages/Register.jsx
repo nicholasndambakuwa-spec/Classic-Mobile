@@ -14,7 +14,7 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost/myshop/api/register.php', form);
+      const res = await axios.post('https://classicmobile.infinityfreeapp.com/register.php', form);
       if (res.data.success) {
         toast.success('Account created! Please log in 🎉');
         navigate('/login');

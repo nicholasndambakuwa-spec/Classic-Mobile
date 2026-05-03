@@ -20,7 +20,7 @@ export default function DemoPay() {
     setTimeout(async () => {
       try {
         // Update order status via API
-        await fetch('http://localhost/myshop/api/update_order.php', {
+        await fetch('https://classicmobile.infinityfreeapp.com/update_order.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

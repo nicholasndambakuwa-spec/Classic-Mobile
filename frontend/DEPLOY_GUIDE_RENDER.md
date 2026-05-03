@@ -195,7 +195,7 @@ Update all API calls to use relative URLs:
 
 Change:
 ```javascript
-axios.post('http://localhost/myshop/api/checkout.php', data)
+axios.post('https://classicmobile.infinityfreeapp.com/checkout.php', data)
 ```
 
 To:

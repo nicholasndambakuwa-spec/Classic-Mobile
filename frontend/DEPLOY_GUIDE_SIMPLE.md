@@ -149,7 +149,7 @@ Now we need to tell your frontend where to find your backend!
 **In your code, change this:**
 ```javascript
 // Old way (for your computer only)
-axios.post('http://localhost/myshop/api/checkout.php', data)
+axios.post('https://classicmobile.infinityfreeapp.com/checkout.php', data)
 ```
 
 **To this:**
@@ -163,7 +163,7 @@ axios.post('https://YOUR-BACKEND-URL/api/checkout.php', data)
 - Register.jsx  
 - Checkout.jsx
 
-Replace `http://localhost/myshop/api/` with your Render URL!
+Replace `https://classicmobile.infinityfreeapp.com/` with your Render URL!
 
 ---
 
