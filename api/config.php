@@ -9,10 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-$host = "localhost";
-$db   = "shopdb";
-$user = "root";
-$pass = "";  // XAMPP default has no password
+$host = "sql101.infinityfree.com";
+$db   = "if0_41819060_XXX";
+$user = "if0_41819060";
+$pass = "Y5oJUlY8YOr3nLw";  // XAMPP default has no password
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
@@ -21,4 +21,3 @@ try {
     echo json_encode(["error" => "Database connection failed: " . $e->getMessage()]);
     exit();
 }
-?>
